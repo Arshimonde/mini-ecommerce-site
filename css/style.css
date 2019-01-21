@@ -1,0 +1,38 @@
+:root{
+    /*colors*/
+    --primary-color:#475c7a;
+    --primary-color-rgb: 71, 92, 122;
+    --secondary-color: #fcbb6d;
+    --secondary-color-rgb: 252, 187, 109;
+    --white-color:#f1f1f1;
+    /*font-family*/
+    --font-family: 'Josefin Sans', sans-serif;
+}
+
+body {
+    font-family: var(--font-family);
+}
+
+/* MAIN HEADER START*/
+.main-header{
+    background-color: var(--primary-color);
+}
+.main-header .navbar-brand{
+    color:var(--white-color);
+}
+.main-header .navbar-brand i{
+    color:var(--secondary-color);
+}
+.main-header nav li a{
+    color:var(--white-color);
+}
+.main-header nav li:last-of-type{
+    border:1px solid var(--secondary-color);
+    border-radius:0.2em;
+    transition:all 0.25s;
+}
+.main-header nav li:last-of-type:hover{
+    color:var(--white-color);
+    background-color: var(--secondary-color);
+}
+/* MAIN HEADER END*/
