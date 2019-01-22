@@ -33,30 +33,17 @@
 <body>
     <!-- INCLUDE FUNCTIONS.php -->
     <?php require_once("functions.php")?>
-
+    
     <!-- HEADER -->
+    <?php if(get_current_page()!="dashboard"):?>
     <header class="main-header">
         <div class="navbar shadow-lg">
             <div class="container d-flex justify-content-between">
                 <!-- Navbar Brand -->
-                <a href="/index.php" class="navbar-brand d-flex align-items-center">
-                    <i class="fas fa-shopping-cart fa-lg mr-1 d-block"></i>
-                    <strong class="mt-1">Mini Ecom</strong>
-                </a>
-                <!-- Navbar -->
-                <nav>
-                    <ul class="nav d-flex align-items-center">
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Our Products</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Contact Us</a>
-                        </li>
-                        <li class="nav-item">
-                            <a href="#" class="nav-link">Sign up</a>
-                        </li>
-                    </ul>
-                </nav>
+                <?php include "templates/site-brand.html"; ?>
+                <!-- NAVBAR -->
+                <?php include "templates/navbar.html"; ?>
             </div>
         </div>
     </header>
+    <?php endif;?>
