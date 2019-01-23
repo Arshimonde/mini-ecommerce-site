@@ -1,0 +1,7 @@
+{
+    "server_name" : "localhost",
+    "database_name":"mini_ecommerce",
+    "database_user":"root",
+    "database_password":"",
+    "database_port":"3306"
+}

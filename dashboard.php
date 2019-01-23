@@ -15,6 +15,10 @@
                             include "templates/dashboard/products.php";
                             break;
                         }
+                        case 'categories':{
+                            include "templates/dashboard/categories.php";
+                            break;
+                        }
                     endswitch;
                 endif;
             ?>

@@ -55,6 +55,11 @@ body {
 .btn-secondary.focus, .btn-secondary:focus {
     box-shadow: 0 0 0 0.2rem rgba(var(--secondary-color-rgb), 0.5)!important;
 }
+    /* form control */
+.form-control:focus{
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb),.25);
+}
 /*GENERAL STYLES END*/
 /* MAIN HEADER START*/
 .main-header{
