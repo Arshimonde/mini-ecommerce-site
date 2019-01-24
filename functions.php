@@ -27,7 +27,7 @@ function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null)
     $query = "SELECT ".$columns." FROM ".$table;
     //join
     if(isset($arrays_join) && !empty($arrays_join) ){
-        $query .= " ".implode(',',$arrays_join);
+        $query .= " ,".implode(',',$arrays_join);
     }
     // limit
     if(isset($limit) && !empty($limit) ){
@@ -145,4 +145,21 @@ function dashboard_alert($alert_type='Information',$alert_color='info',$message)
     return $html;
 }
 /* DASHBOARD ALERT FUNCTION END*/
+
+/* SAVE PRODUCT IMAGE ALERT FUNCTION START*/
+function save_product_image($file){
+    $file_name = $file["name"];
+    $file_type = $file["type"];
+    $file_size = $file["size"];
+    $file_temp_loc = $file["tmp_name"];
+
+    $destination = "public/products-images/".$file_name;
+
+    if(move_uploaded_file($file_temp_loc,$destination)):
+        return $destination;
+    else:
+        return false;
+    endif;
+}
+/* SAVE PRODUCT IMAGE ALERT FUNCTION END*/
 ?>

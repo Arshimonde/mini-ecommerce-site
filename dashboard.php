@@ -19,6 +19,10 @@
                             include "templates/dashboard/categories.php";
                             break;
                         }
+                        case 'add-product':{
+                            include "templates/dashboard/add_product.php";
+                            break;
+                        }
                     endswitch;
                 endif;
             ?>
