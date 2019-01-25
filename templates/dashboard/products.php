@@ -1,3 +1,14 @@
+<!-- DELETE PRODUCT SCRIPT -->
+<?php
+    if(isset($_GET["id"])):
+       if(db_delete_row("product",$_GET["id"])):
+           echo dashboard_alert("Success","success","Product has been deleted successfully");
+       else:
+           echo dashboard_alert("Warning","warning","Product has not been deleted successfully");
+       endif;
+    endif;
+?>
+<!-- DISPLAY PRODUCTS -->
 <div class="container-fluid px-4">
     <table class="table table-striped table-sm">
         <thead >
@@ -56,7 +67,7 @@
                     Modify
                 </a>
                 <!-- delete action -->
-                <a href="" class="btn btn-danger">
+                <a  href="/dashboard.php?section=products&id=<?= $product["p_id"] ?>" class="btn btn-danger delete_product">
                     <i class="far fa-trash-alt fa-1x"></i>
                     Delete
                 </a>

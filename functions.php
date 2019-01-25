@@ -98,9 +98,8 @@ function db_insert($table,$elements){//elements keys should be as the same as in
 function db_delete_row($table,$id){
     global $app_db;
     $query = "DELETE FROM ".$table." WHERE id = ".$id;
-    // var_dump($query);
      $is_deleted = mysqli_query($app_db,$query);
-     if($is_deleted) return true;
+     if(mysqli_affected_rows($app_db)>0) return true;
      return false;
 }
 /* DELETE FROM DATABASE END */
@@ -124,7 +123,7 @@ function db_update_row($table,$elements,$where=null){//elements keys should be a
         // execute the query 
         $is_updated = mysqli_query($app_db,$query);
         
-        if($is_updated) return true;
+        if(mysqli_affected_rows($app_db)>0) return true;
         else return false;
     endif;
     return false;

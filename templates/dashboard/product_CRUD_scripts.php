@@ -59,6 +59,13 @@
                 $alert_message = "Product <i>$product_name</i>  was Added";
                 $alert_status = "Success";
                 $alert_class = "success";
+                //empty variables
+                $saved_image_url = "";
+                $product_name = "";
+                $category_id = "";
+                $unit_price = "";
+                $quantity = "";
+                $disponible = "";
             else:
                 $alert_message = "Product <i>$product_name</i> was not Added";
                 $alert_status = "Warning";
