@@ -21,7 +21,7 @@ function get_current_page(){
 /*  GET CURRENT PAGE START  */
 
 /* SELECT FROM DATABASE START*/
-function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null){
+function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null,$orderby=null){
     global $app_db;
     $table_data = array();
     $query = "SELECT ".$columns." FROM ".$table;
@@ -29,14 +29,19 @@ function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null)
     if(isset($arrays_join) && !empty($arrays_join) ){
         $query .= " ,".implode(',',$arrays_join);
     }
-    // limit
-    if(isset($limit) && !empty($limit) ){
-        $query .= " LIMIT ".$limit;
-    }
     // where
     if(isset($where) && !empty($where) ){
         $query .= " WHERE ".$where;
     }
+    // orderby
+    if(isset($orderby) && !empty($orderby) ){
+        $query .= " ORDER BY ".$orderby;
+    }
+    // limit
+    if(isset($limit) && !empty($limit) ){
+        $query .= " LIMIT ".$limit;
+    }
+    
     $result = mysqli_query($app_db, $query );
     
     if(mysqli_num_rows($result)>0){
@@ -169,4 +174,57 @@ function get_product_image_url($id){
 }
 /* GET PRODUCT IMAGE FUNCTION END*/
 
+/* GET PRODUCT Price FUNCTION START*/
+function get_product_price($id){
+    $price = db_select("product","unit_price",null,"id=".$id);
+    return $price[0]["unit_price"];;
+}
+/* GET PRODUCT Price FUNCTION END*/
+
+/* GET PRODUCT name FUNCTION START*/
+function get_product_name($id){
+    $name = db_select("product","product_name",null,"id=".$id);
+    return $name[0]["product_name"];
+}
+/* GET PRODUCT name FUNCTION END*/
+
+/* GET PRODUCT quantity FUNCTION START*/
+function get_product_quantity($id){
+    $quantity = db_select("product","quantity",null,"id=".$id);
+    return $quantity[0]["quantity"];
+}
+/* GET PRODUCT quantity FUNCTION END*/
+
+/* GET PRODUCT category FUNCTION START*/
+function get_product_category($id){
+    $where = "p.id=".$id;
+    $where .= "p.id_category = c.id";
+
+    $category = db_select("product p","*,c.name",array("category c"), $where);
+    return $category[0]["c.name"];
+}
+/* GET PRODUCT category FUNCTION END*/
+
+/* is PRODUCT available FUNCTION START*/
+function is_product_available($id){
+    $where = "id=".$id;
+    $disponible = db_select("product","disponible",null, $where);
+    $disponible = $disponible[0]["disponible"];
+    if($disponible == "1"):
+        return true;
+    else: 
+        return false; 
+    endif;
+}
+/* GET PRODUCT category FUNCTION END*/
+
+/* GET Base URL FUNCTION START*/
+function base_url(){
+    return sprintf(
+      "%s://%s",
+      isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http',
+      $_SERVER['SERVER_NAME']
+    );
+  }
+/* GET Base URL FUNCTION END*/
 ?>

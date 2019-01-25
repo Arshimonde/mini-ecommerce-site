@@ -9,7 +9,7 @@
                 <p>
                     Welcome to a website where the E-Commerce gets real and entertaining at the same time
                 </p>
-                <p><a class="btn btn-primary btn-lg" href="#" role="button">View products</a></p>
+                <p><a class="btn btn-primary btn-lg" href="/our-products.php" role="button">View products</a></p>
             </div>
             <!-- IMAGE -->
             <div class="col-xl-5 image ">

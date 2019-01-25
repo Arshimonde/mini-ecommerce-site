@@ -16,7 +16,7 @@ body {
 /*GENERAL STYLES START*/
     /*typography*/
 .text-color-secondary{
-    color:var(--secondary-color);
+    color:var(--secondary-color)!important;
 }
 .text-color-primary{
     color:var(--primary-color);
@@ -59,6 +59,13 @@ body {
 .form-control:focus{
     border-color: var(--primary-color);
     box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb),.25);
+}
+    /* images */
+.product-thumb{
+    height:150px;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 /*GENERAL STYLES END*/
 /* MAIN HEADER START*/
@@ -170,3 +177,14 @@ body {
     }
     
 /* DASHBOARD END */
+
+/* Our Products START */
+    /* header */
+.our-products .header{
+    height:350px;
+    background-repeat: no-repeat;
+    background-position: right;
+    background-size: 80%;
+    background-image: url("../images/fogg-order-completed.png");
+}
+/* Our Products END */

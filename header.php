@@ -42,7 +42,7 @@
                 <!-- Navbar Brand -->
                 <?php include "templates/site-brand.html"; ?>
                 <!-- NAVBAR -->
-                <?php include "templates/navbar.html"; ?>
+                <?php include "templates/navbar.php"; ?>
             </div>
         </div>
     </header>
