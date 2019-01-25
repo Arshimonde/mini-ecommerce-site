@@ -13,49 +13,54 @@
         </thead>
         <tbody>
             <?php
-                $products = db_select("product p","*",array("category c"),"p.id_category = c.id");
+                $products = db_select("product p","*,p.id as p_id",array("category c"),"p.id_category = c.id");
             ?>
             <!-- Product row start -->
             <?php foreach($products as $product):?>
             <tr>
-              <th>
+              <td>
                 <img
                     style="width:75px" 
                     class="img-fluid img-thumbnail" 
                     src="<?= $product["product_image"] ?>" 
                     alt="product image"
                 >
-              </th>
-              <th class="align-middle text-center">
+              </td>
+              <td class="align-middle text-center">
                 <?= $product["product_name"] ?>
-              </th>
-              <th class="align-middle text-center">
+              </td>
+              <td class="align-middle text-center">
                  <?= $product["unit_price"] ?>$
-              </th>
-              <th class="align-middle text-center">
+              </td>
+              <td class="align-middle text-center">
                  <?= $product["quantity"] ?>
-              </th>
-              <th class="align-middle text-center">
+              </td>
+              <td class="align-middle text-center">
                 <?= $product["disponible"]==1 ? "yes" : "no" ?>
-              </th>
-              <th class="align-middle text-center">
+              </td>
+              <td class="align-middle text-center">
                 <?= $product["name"] ?>
-              </th>
-              <th class="align-middle text-center">
-
+              </td>
+              <td class="align-middle text-center">
+                <!-- view action -->
                 <a href="" class="btn btn-secondary mr-2">
                     <i class="fas fa-external-link-alt fa-1x"></i>
                     View
                 </a>
-                <a href="" class="btn btn-primary mr-2">
+                <!-- modify action -->
+                <a 
+                    href="/dashboard.php?section=add-product&id=<?= $product["p_id"] ?>" 
+                    class="btn btn-primary mr-2"
+                >
                     <i class="far fa-edit fa-1x"></i>
                     Modify
                 </a>
+                <!-- delete action -->
                 <a href="" class="btn btn-danger">
                     <i class="far fa-trash-alt fa-1x"></i>
                     Delete
                 </a>
-              </th>
+              </td>
             </tr>
             <?php endforeach;?>
             <!-- Product row end -->

@@ -146,7 +146,7 @@ function dashboard_alert($alert_type='Information',$alert_color='info',$message)
 }
 /* DASHBOARD ALERT FUNCTION END*/
 
-/* SAVE PRODUCT IMAGE ALERT FUNCTION START*/
+/* SAVE PRODUCT IMAGE FUNCTION START*/
 function save_product_image($file){
     $file_name = $file["name"];
     $file_type = $file["type"];
@@ -161,5 +161,13 @@ function save_product_image($file){
         return false;
     endif;
 }
-/* SAVE PRODUCT IMAGE ALERT FUNCTION END*/
+
+/* GET PRODUCT IMAGE FUNCTION START*/
+function get_product_image_url($id){
+    $product_img = db_select("product","product_image",null,"id=".$id);
+    $img_url = $product_img[0]["product_image"];
+    return empty($img_url)?false:$img_url;
+}
+/* GET PRODUCT IMAGE FUNCTION END*/
+
 ?>

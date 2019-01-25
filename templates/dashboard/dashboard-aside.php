@@ -48,11 +48,19 @@
           <li class="nav-item">
             <?php
               $active = "";
-              if(isset($_GET["section"]) && $_GET["section"]=="add-product") $active="active";
+              $text = "Add product";
+              $id_param = "";
+              if(isset($_GET["section"]) && $_GET["section"]=="add-product"):         $active="active";
+                  if(isset($_GET["id"])):
+                     $text = "Modify product";
+                     $id_param = "&id=".$_GET["id"];
+                  endif;
+              endif;
+              
             ?>
-            <a class="nav-link <?php echo $active;?>" href="/dashboard.php?section=add-product">
+            <a class="nav-link <?php echo $active;?>" href="/dashboard.php?section=add-product<?=$id_param?>">
               <i class="far fa-plus-square feather"></i>
-              Add product
+              <?=$text?>
             </a>
           </li>
 
