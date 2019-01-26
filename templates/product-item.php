@@ -23,6 +23,11 @@
         <h5 class="text-color-secondary">$<?=$price?></h5>
     </div>
     <div class="card-footer clearfix px-2">
+        <?php if(get_current_page()=="our-products"): ?>
+            <button data-id="<?=$id?>" class="btn btn-primary add-to-cart-btn text-center p-1 px-2 ">
+                <i class="fas fa-cart-plus"></i>
+            </button>
+        <?php endif;?>
         <a href="#" class="btn btn-secondary float-right">
             View product
         </a>

@@ -187,4 +187,51 @@ body {
     background-size: 80%;
     background-image: url("../images/fogg-order-completed.png");
 }
+    /* floating button*/
+.floating-button{
+    height:70px;
+    width:70px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:24px;
+    color:var(--white-color);
+    background-color:var(--secondary-color);
+    position: fixed;
+    bottom:70px;
+    right:50px;
+    border-radius:50%;
+    border:0;
+    cursor:pointer;
+}
+.floating-button:hover{
+    background: var(--primary-color);
+    box-shadow:none!important;
+}
+.floating-button:focus{
+    outline:0;
+}
+.animated{
+    display: block!important;
+}
+    /* cart */
+.cart{
+    bottom:70px;
+    right:50px;
+    z-index: 1200;
+}
+.cart .cart-body{
+    position: relative;
+    bottom:80px;
+    right:50px;
+    background-color: var(--white-color);
+    width:400px;
+    max-height:300px;
+    overflow:auto;
+}
+.cart .floating-button{
+    bottom:0px;
+    right:0px;
+}
+
 /* Our Products END */

@@ -25,4 +25,21 @@ $(function(){
             });
         }
     );
+     /* toggle cart  */
+     $(".floating-button").click(function(){
+        $(".cart .cart-body").toggleClass("animated jackInTheBox")
+    });
+     /* add to cart  */
+     $(".add-to-cart-btn").click(function(){
+        let id = $(this).attr("data-id");
+        $.ajax({
+            url: "/ajax-controllers.php",
+            data:{"id":id,"action":"add-to-cart"},
+            dataType:"json",
+            type:"POST",
+            complete:function( jqXHR,textStatus){
+                alert(jqXHR.responseText);
+            }
+        });
+     });
 });

@@ -18,6 +18,8 @@
             </div>
             <!-- products -->
             <?php include "templates/our-products/products-listing.php";?>
+            <!-- cart -->
+            <?php include "templates/our-products/cart.php";?>
         </div>
     </div>
 </main>
