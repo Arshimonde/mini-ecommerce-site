@@ -233,5 +233,7 @@ body {
     bottom:0px;
     right:0px;
 }
-
+.cart .remove-from-cart i{
+    pointer-events: none;
+}
 /* Our Products END */

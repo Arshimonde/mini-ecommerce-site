@@ -38,8 +38,23 @@ $(function(){
             dataType:"json",
             type:"POST",
             complete:function( jqXHR,textStatus){
-                alert(jqXHR.responseText);
+                $(".our-products .cart-body .content").html(jqXHR.responseText);
             }
         });
+     });
+    /* remove from cart */
+    $(".cart-body").click(function(e){
+        if($(e.target).hasClass("remove-from-cart")){
+            let id = $(e.target).attr("data-id");
+            $.ajax({
+                url: "/ajax-controllers.php",
+                data:{"id":id,"action":"remove-from-cart"},
+                dataType:"json",
+                type:"POST",
+                complete:function( jqXHR,textStatus){
+                    $(".our-products .cart-body .content").html(jqXHR.responseText);
+                }
+            });
+        }
      });
 });

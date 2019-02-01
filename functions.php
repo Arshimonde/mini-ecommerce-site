@@ -1,4 +1,6 @@
 <?php
+session_start();
+
 /* INIT DATABASE GLOBALLY START */
     /* read configuration file */
     $app_config_json = file_get_contents("app-config.json");
@@ -227,4 +229,50 @@ function base_url(){
     );
   }
 /* GET Base URL FUNCTION END*/
+
+/* Add to cart cookies FUNCTION START*/
+function add_to_cart($product_id){
+    if(isset($_SESSION["cart_products"])):
+        if(!in_array($product_id,$_SESSION["cart_products"])):
+            array_push($_SESSION["cart_products"],$product_id);
+        endif;
+    else:
+        $_SESSION["cart_products"] = array();
+    endif;
+}
+/* Add to cart cookies FUNCTION END*/
+
+/* Remove from cart Start */
+function remove_from_cart($product_id){
+    $product_ids = $_SESSION["cart_products"];
+    if(isset($product_ids)):
+        foreach($product_ids as $key=>$id):
+            if($id == $product_id):
+                 unset($product_ids[$key]);
+                 break;
+            endif;
+        endforeach;
+        $_SESSION["cart_products"] = $product_ids;
+    endif;
+}
+/* Remove from cart END */
+
+/* print all cart items START*/
+function get_cart_items_html(){
+    $product_ids = $_SESSION["cart_products"];
+    $html = "";
+    if(isset($product_ids) && !empty($product_ids)):
+        foreach($product_ids as $id):
+            ob_start();
+            include "templates/our-products/cart-item.php";
+            $html.= ob_get_contents();
+            ob_clean();
+        endforeach;
+    else:
+    $html = '<p class="mb-0 cart-empty">Cart is empty</p>';
+    endif;
+
+    return $html;
+}
+/* print all cart items END*/
 ?>
