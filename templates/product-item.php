@@ -11,14 +11,13 @@
     <a href="#">
         <div class="img-fluid product-thumb img-thumbnail" 
             style="background-image:url(<?=$image?>)">
-
         </div>
     </a>
     <div class="card-body">
         <h4 class="card-title">
-            <a href="#" class="font-weight-bold text-color-primary">
+            <span class="font-weight-bold text-color-primary">
                 <?=$name?>
-            </a>
+            </span>
         </h4>
         <h5 class="text-color-secondary">$<?=$price?></h5>
         <span class="badge badge-primary bg-color-primary float-right"><?=get_product_category($id)?></span>
@@ -29,7 +28,7 @@
                 <i class="fas fa-cart-plus"></i>
             </button>
         <?php endif;?>
-        <a href="#" class="btn btn-secondary float-right">
+        <a target="_blank" href="/detail-product.php?id=<?=$id?>" class="btn btn-secondary float-right">
             View product
         </a>
     </div>

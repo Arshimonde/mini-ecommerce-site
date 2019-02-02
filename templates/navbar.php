@@ -25,9 +25,9 @@
 
         <!-- sign up button -->
         <li class="nav-item">
-            <a href="#" class="nav-link d-flex align-items-center">
+            <a href="/dashboard.php" class="nav-link d-flex align-items-center">
                 <i class="fas fa-sign-in-alt fa-lg mr-1"></i>
-                <span class="mt-1">Sign up/in</span>
+                <span class="mt-1">Dashboard</span>
             </a>
         </li>
     </ul>

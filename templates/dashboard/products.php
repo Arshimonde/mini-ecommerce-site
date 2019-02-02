@@ -54,7 +54,7 @@
               </td>
               <td class="align-middle text-center">
                 <!-- view action -->
-                <a href="" class="btn btn-secondary mr-2">
+                <a target="_blank" href="/detail-product.php?id=<?=$product["p_id"]?>" class="btn btn-secondary mr-2">
                     <i class="fas fa-external-link-alt fa-1x"></i>
                     View
                 </a>

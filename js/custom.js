@@ -27,10 +27,15 @@ $(function(){
     );
      /* toggle cart  */
      $(".floating-button").click(function(){
-        $(".cart .cart-body").toggleClass("animated jackInTheBox")
+        $(".cart .cart-body").toggleClass("animated jackInTheBox");
+        $(".floating-button").removeClass("animated bounce");
     });
      /* add to cart  */
      $(".add-to-cart-btn").click(function(){
+         
+        if($(".floating-button").hasClass("animated bounce")){
+            $(".floating-button").removeClass("animated bounce");
+        }
         let id = $(this).attr("data-id");
         $.ajax({
             url: "/ajax-controllers.php",
@@ -38,7 +43,8 @@ $(function(){
             dataType:"json",
             type:"POST",
             complete:function( jqXHR,textStatus){
-                $(".our-products .cart-body .content").html(jqXHR.responseText);
+                $(".floating-button").addClass("animated bounce");
+                $(".cart-body .content").html(jqXHR.responseText);
             }
         });
      });
@@ -52,7 +58,7 @@ $(function(){
                 dataType:"json",
                 type:"POST",
                 complete:function( jqXHR,textStatus){
-                    $(".our-products .cart-body .content").html(jqXHR.responseText);
+                    $(".cart-body .content").html(jqXHR.responseText);
                 }
             });
         }
