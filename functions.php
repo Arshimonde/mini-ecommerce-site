@@ -43,7 +43,7 @@ function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null,
     if(isset($limit) && !empty($limit) ){
         $query .= " LIMIT ".$limit;
     }
-    
+
     $result = mysqli_query($app_db, $query );
     
     if(mysqli_num_rows($result)>0){
@@ -151,7 +151,33 @@ function dashboard_alert($alert_type='Information',$alert_color='info',$message)
     return $html;
 }
 /* DASHBOARD ALERT FUNCTION END*/
+/* GET PRODUCT IDS START*/
+function get_product_ids($criteria = array()){
+    if(isset($criteria) && !empty($criteria)):
+        $where = " c.id = p.id_category";
+        // product name
+        if(isset($criteria["product_name"]) && !empty($criteria["product_name"])):
+            $where .= " AND p.product_name LIKE '%".$criteria["product_name"]."%'";
+        endif;
+        // product category
+        if(isset($criteria["product_category"]) && $criteria["product_category"] != -1):
+            $where .= " AND c.id = ".$criteria["product_category"];
+        endif;
+        // product min price
+        if(isset($criteria["min_price"]) && !empty($criteria["min_price"])):
+            $where .= " AND p.unit_price >= ".$criteria["min_price"];
+        endif;
+        // product max price
+        if(isset($criteria["max_price"]) && !empty($criteria["max_price"]) ):
+            $where .= " AND p.unit_price <= ".$criteria["max_price"];
+        endif;
 
+        return db_select("category c,product p","p.id",null,$where);
+    else:
+        return db_select("product","id");
+    endif;
+}
+/* GET PRODUCT IDS END*/
 /* SAVE PRODUCT IMAGE FUNCTION START*/
 function save_product_image($file){
     $file_name = $file["name"];
@@ -199,11 +225,11 @@ function get_product_quantity($id){
 
 /* GET PRODUCT category FUNCTION START*/
 function get_product_category($id){
-    $where = "p.id=".$id;
-    $where .= "p.id_category = c.id";
+    $where = " p.id=".$id;
+    $where .= " AND p.id_category = c.id";
 
     $category = db_select("product p","*,c.name",array("category c"), $where);
-    return $category[0]["c.name"];
+    return $category[0]["name"];
 }
 /* GET PRODUCT category FUNCTION END*/
 

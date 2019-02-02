@@ -14,7 +14,7 @@
         <div class="row">
             <!-- filters -->
             <div class="col-lg-3">
-
+                <?php include "templates/our-products/filters.php";?>
             </div>
             <!-- products -->
             <?php include "templates/our-products/products-listing.php";?>

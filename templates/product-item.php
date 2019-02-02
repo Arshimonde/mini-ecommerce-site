@@ -21,6 +21,7 @@
             </a>
         </h4>
         <h5 class="text-color-secondary">$<?=$price?></h5>
+        <span class="badge badge-primary bg-color-primary float-right"><?=get_product_category($id)?></span>
     </div>
     <div class="card-footer clearfix px-2">
         <?php if(get_current_page()=="our-products"): ?>
