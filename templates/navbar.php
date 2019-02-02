@@ -18,11 +18,6 @@
             ?>
             <a href="/our-products.php" class="nav-link <?=$active?>">Our Products</a>
         </li>
-
-        <li class="nav-item">
-            <a href="#" class="nav-link">Contact Us</a>
-        </li>
-
         <!-- sign up button -->
         <li class="nav-item">
             <a href="/dashboard.php" class="nav-link d-flex align-items-center">

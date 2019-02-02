@@ -101,6 +101,14 @@ function db_insert($table,$elements){//elements keys should be as the same as in
     return false;
 }
 /* INSERT IN DATABASE END*/
+
+/* GET LAST INSERTED ROW ID START*/
+function get_last_inserted_id(){
+    global $app_db;
+    return mysqli_insert_id ( $app_db );
+}
+/* GET LAST INSERTED ROW ID END*/
+
 /* DELETE FROM DATABASE START */
 function db_delete_row($table,$id){
     global $app_db;
@@ -285,7 +293,7 @@ function remove_from_cart($product_id){
 
 /* print all cart items START*/
 function get_cart_items_html(){
-    $product_ids = $_SESSION["cart_products"];
+    $product_ids = get_cart_items();
     $html = "";
     if(isset($product_ids) && !empty($product_ids)):
         foreach($product_ids as $id):
@@ -301,4 +309,11 @@ function get_cart_items_html(){
     return $html;
 }
 /* print all cart items END*/
+
+/* get all cart items START */
+function get_cart_items(){
+    $product_ids = $_SESSION["cart_products"];
+    return $product_ids;
+}
+/* get all cart items END */
 ?>

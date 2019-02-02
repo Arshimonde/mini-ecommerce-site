@@ -5,9 +5,9 @@
             <?=get_cart_items_html()?>
         </div>
         <div class="row mt-3 float-right">
-            <button class="btn btn-sm btn-primary">
+            <a href="/checkout.php" class="btn btn-sm btn-primary">
                 checkout    
-            </button>
+            </a>
         </div>
     </div>
     <!-- floating button -->
