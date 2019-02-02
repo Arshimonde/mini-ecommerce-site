@@ -2,10 +2,11 @@
 <?php
     if(isset($_POST["first_name"])):
         if(db_insert("client",$_POST)):
+            //insert client
             $client_id = get_last_inserted_id();
+            //insert purchases
             $cart_items_ids = get_cart_items();
             $all_inserted = true;
-
             foreach($cart_items_ids as $id):
                 $cart_element = array();
                 $cart_element["idClient"] = $client_id;
@@ -15,7 +16,13 @@
                     $all_inserted = false;
                     break;
                 endif;
-
+                // Decrease quantity
+                $quantity = db_select("product","quantity",null,"id = ".$id)[0]["quantity"];
+                $product_elements = array(
+                    "quantity" => $quantity - 1
+                );
+                
+                db_update_row("product",$product_elements,"id = ".$id);
             endforeach;
 
             if(!$all_inserted):

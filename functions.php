@@ -129,6 +129,7 @@ function db_update_row($table,$elements,$where=null){//elements keys should be a
     endforeach;
     //concatenate each column = value with ","
     $query .= implode(", ",$sets);
+  
     //where testing 
     if(isset($where)):
         if(strpos(strtolower($where),"where")!==false)

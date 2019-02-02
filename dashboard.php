@@ -11,6 +11,10 @@
             <?php
                 if(isset($_GET["section"]) ):
                     switch($_GET["section"]):
+                        case 'orders':{
+                            include "templates/dashboard/orders.php";
+                            break;
+                        }
                         case 'products':{
                             include "templates/dashboard/products.php";
                             break;
@@ -21,6 +25,10 @@
                         }
                         case 'add-product':{
                             include "templates/dashboard/add_product.php";
+                            break;
+                        }
+                        case 'customers':{
+                            include "templates/dashboard/customers.php";
                             break;
                         }
                     endswitch;
