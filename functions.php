@@ -20,7 +20,7 @@ function get_current_page(){
     $current_page = substr($current_path,1,(strpos($current_path,".")-1));
     return $current_page;
 }
-/*  GET CURRENT PAGE START  */
+/*  GET CURRENT PAGE END  */
 
 /* SELECT FROM DATABASE START*/
 function db_select($table,$columns,$arrays_join=array(),$where=null,$limit=null,$orderby=null){
@@ -161,7 +161,7 @@ function dashboard_alert($alert_type='Information',$alert_color='info',$message)
 }
 /* DASHBOARD ALERT FUNCTION END*/
 /* GET PRODUCT IDS START*/
-function get_product_ids($criteria = array()){
+function get_product_ids($criteria = array(),$limit = null){
     if(isset($criteria) && !empty($criteria)):
         $where = " c.id = p.id_category";
         // product name
@@ -181,9 +181,9 @@ function get_product_ids($criteria = array()){
             $where .= " AND p.unit_price <= ".$criteria["max_price"];
         endif;
 
-        return db_select("category c,product p","p.id",null,$where);
+        return db_select("category c,product p","p.id",null,$where,$limit);
     else:
-        return db_select("product","id");
+        return db_select("product","id",null,null,$limit);
     endif;
 }
 /* GET PRODUCT IDS END*/
@@ -202,7 +202,6 @@ function save_product_image($file){
         return false;
     endif;
 }
-
 /* GET PRODUCT IMAGE FUNCTION START*/
 function get_product_image_url($id){
     $product_img = db_select("product","product_image",null,"id=".$id);
@@ -317,4 +316,141 @@ function get_cart_items(){
     return $product_ids;
 }
 /* get all cart items END */
+
+/* BREADCRUMB START */
+function breadcrumbs($home = 'Home') {
+    // This gets the REQUEST_URI (/path/to/file.php), splits the string (using '/') into an array, and then filters out any empty values
+    $path = array_filter(explode('/', parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH)));
+    //base url
+    $base = base_url();
+
+    // Initialize a temporary array with our breadcrumbs. (starting with our home page, which I'm assuming will be the base URL)
+    $breadcrumbs = Array("<a href=\"$base\">$home</a>");
+ 
+    // Find out the index for the last value in our path array
+    $array_keys = array_keys($path);
+    $last = end($array_keys);
+ 
+    // Build the rest of the breadcrumbs
+    foreach ($path AS $x => $crumb) {
+ 
+        // If we are not on the last index, then display an <a> tag
+        if($crumb == "detail-product.php" && $x == $last ){
+            $breadcrumbs[] = "<a href=\"$base/our-products.php\">Our Products</a>";
+        }
+        // Our "title" is the text that will be displayed (strip out .php and turn '_' into a space)
+        $title = ucwords(str_replace(Array('.php', '_',"-"), Array('', ' ',' '), $crumb));
+        if ($x != $last)
+            $breadcrumbs[] = "<a href=\"$base$crumb\">$title</a>";
+        // Otherwise, just display the title (minus)
+        else
+            $breadcrumbs[] = $title;
+    }
+ 
+    // Build our temporary array (pieces of bread) into one big string :)
+    return $breadcrumbs;
+}
+/* BREADCRUMB END */
+/* PAGINATE DATA START*/
+function get_pagination($criteria,$elements_per_page=5,$page=1,$print_pagination=true,$how_much = null){
+    $count = count(get_product_ids($criteria));
+    /* How much rows in $table */
+    $element_count = isset($how_much)?$how_much:$count;
+    $pages_count = ceil($element_count / $elements_per_page);
+    /* Pagination Logic */
+    if(!$print_pagination):
+        /* CALCULATE OFFSET OF ROWS IN TABLE $table */
+        $limit_offset = (($page-1) * $elements_per_page);
+
+        $mysql_limit = $limit_offset.",".$elements_per_page;
+        return $mysql_limit;
+    else:
+        /* get current page */
+        $current_page = isset($_GET["page"])?((int)$_GET["page"]) : 1;
+        /* PRINT PAGINATION */
+        $html = "";
+        $html .= '<nav aria-label="Page navigation ">';
+        $html .=    '<ul class="pagination pagination-sm justify-content-start">';
+        /* Previous Button */
+        $previous_disable = ($current_page == 1) ? " disabled " : "";
+        $html .= '<li class="page-item '.$previous_disable.'">';
+        $html .=  '<a class="page-link" href="'.get_pagination_uri($current_page-1).'">                         Précédent
+                    </a>';
+        $html .= '</li>';
+        /* LOOP through pages links */
+        $active = "";
+        for($i = 1;$i<= $pages_count;$i++):
+            /* active page start */
+            if($current_page == $i):
+                $active = "active";
+            else:
+                $active ="";
+            endif;
+            /* active page end */
+
+            /* Pages Buttons */
+            $html.='<li class="page-item '.$active.'">
+                            <a class="page-link" href="'.get_pagination_uri($i).'">'.$i.'</a>
+                    </li>';
+            
+        endfor;
+        /* NEXT Buttons */
+        $next_disable = ($current_page == $pages_count) ? " disabled " : ""; 
+        $html .= '<li class="page-item '.$next_disable.'">';
+        $html .=  '<a class="page-link" href="'.get_pagination_uri($current_page+1).'">                         Suivant
+                    </a>';
+        $html .= '</li>';
+
+        $html .=     '</ul>';
+        $html .= '</nav>';
+        echo $html;
+    endif;
+}
+    /* get_pagination_url */
+function get_pagination_uri($page_num){
+    /* if url has 'page' in parameters */
+    if(isset($_GET['page'])):        
+        /* get current page name *.php */
+        $current_page = $_SERVER['PHP_SELF'];
+        /* get all GET query */
+        $query = $_GET;
+        // replace parameter(s)
+        $query['page'] = $page_num;
+        // rebuild url
+        $query_result = http_build_query($query);
+
+        return ($current_page."?".$query_result);
+    /* if url dosen't have 'page' in parameters */
+    else:
+        $page_uri_parameter = "";
+        $page_uri = $_SERVER['REQUEST_URI'];
+
+        if(strpos($page_uri,'=')!=false):
+            $page_uri_parameter = "&page=";
+        else:
+            $page_uri_parameter = "?page=";
+        endif;
+        $page_uri_parameter .= $page_num;
+        $page_uri .= $page_uri_parameter;
+
+        return $page_uri;
+    endif;
+}
+/* PAGINATE DATA END*/
+/* COUNT A TABLE FROM DATABASE START */
+function db_count($table){
+    $count = 0;
+    if(isset($table)):
+        global $app_db;
+        $query = "SELECT count(*)  FROM ".$table;
+        $result = mysqli_query($app_db,$query);
+        
+        if(mysqli_num_rows($result) > 0){
+            $rows = mysqli_fetch_array($result);
+            $count = $rows[0];
+        }    
+    endif;
+    return $count;
+}
+/* COUNT A TABLE FROM DATABASE END */
 ?>

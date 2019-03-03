@@ -1,10 +1,10 @@
 <div class="jumbotron py-4 how-it-works mb-0">
     <div class="container">
         <div class="row">
-            <div class="col-lg-6">
+            <div class="col-md-6 col-lg-6">
                 <img class="img-fluid" src="../../images/hugo-expense-tracking.png" alt="delivery boxes">
             </div>
-            <div class="col-lg-6 explaining">
+            <div class="col-md-6 col-lg-6 explaining">
                 <h2 class="display-4 mt-4">How it works?</h2>
                 <p>
                     <ul class="list-unstyled">

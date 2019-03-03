@@ -11,9 +11,10 @@
     </div>
     <!-- Content -->
     <div class="container py-5">
+        <?php include "breadcrumb.php"; ?>
         <div class="row">
             <!-- filters -->
-            <div class="col-lg-3">
+            <div class="col-md-3 col-lg-3 mb-5">
                 <?php include "templates/our-products/filters.php";?>
             </div>
             <!-- products -->

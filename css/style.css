@@ -105,7 +105,11 @@ body {
     .site-introduction img{
         max-height:100%;
     }
-
+    @media only screen and (max-width:767px){
+        .site-introduction{
+            max-height:none;
+        }
+    }
     /*How it works*/
     .how-it-works .media .number{
         font-size: 17px;
@@ -237,3 +241,37 @@ body {
     pointer-events: none;
 }
 /* Our Products END */
+
+/* BREADCRUMB START */
+.breadcrumb-item a{
+    color:var(--secondary-color);
+}
+/* BREADCRUMB END */
+/* Back to top button */
+#back-to-top{
+    right:70px;
+    bottom:150px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size:13px;
+    display: none;
+}
+/* PAGINATION START */
+.page-item.active .page-link
+{
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.page-link{
+    color: var(--primary-color);
+}
+.page-item.disabled{
+    cursor:not-allowed;
+}
+.page-link:focus {
+    z-index: 2;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(var(--primary-color-rgb),.25);
+}
+/* PAGINATION END */

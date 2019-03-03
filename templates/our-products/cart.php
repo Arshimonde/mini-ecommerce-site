@@ -11,7 +11,7 @@
         </div>
     </div>
     <!-- floating button -->
-    <button class="floating-button shadow-lg position-absolute">
+    <button data-toggle="tooltip" title="Shopping cart" data-placement="bottom" class="floating-button shadow-lg position-absolute">
         <i class="fas fa-shopping-basket"></i>
     </button>
 </div>

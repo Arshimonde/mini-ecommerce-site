@@ -1,4 +1,7 @@
 $(function(){
+    $('[data-toggle="tooltip"]').tooltip({
+        trigger:"hover"
+    });
     //FILE UPLOAD:change label in input
     $(".custom-file input[type='file']").change(
         function(){
@@ -63,4 +66,17 @@ $(function(){
             });
         }
      });
+    //  SCROLL TO TOP
+    $(window).scroll(function() {
+       if($(this).scrollTop() > 150){
+            $("#back-to-top").fadeIn();
+       }else{
+            $("#back-to-top").fadeOut();
+       }
+    });
+    $("#back-to-top").click(function() {
+        $('html,body').animate({
+            scrollTop: 0
+        }, 700);
+    });
 });
